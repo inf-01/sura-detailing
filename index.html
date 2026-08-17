@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sura Detaling - Alta Gama</title>
+  <title>Sura Detaling - Alta Gama | Estética Automotriz Exclusiva en Costa Rica</title>
+  <meta name="description" content="Sura Detaling - Especialistas en corrección de pintura, tratamientos cerámicos 9H y detallado automotriz de alta gama en Heredia, Costa Rica.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,7 +80,7 @@
     }
     .btn-contact {
       background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: #000;
+      color: #FFF;
       text-decoration: none;
       padding: 12px 28px;
       border-radius: 50px;
@@ -124,7 +125,6 @@
     .hero-overlay {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      /* Gradiente lateral: muy oscuro a la izquierda para el texto, semi-transparente a la derecha para el logo */
       background: linear-gradient(to right, rgba(5,5,5,0.96) 0%, rgba(5,5,5,0.75) 55%, rgba(5,5,5,0.45) 100%);
       z-index: -1;
     }
@@ -235,36 +235,6 @@
       letter-spacing: -1px;
     }
 
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin-bottom: 0;
-      font-weight: 300;
-    }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 120px 6% 60px;
-      }
-      .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-      }
-      .hero-text { align-items: center; }
-      .hero h1 { font-size: 2.5rem; }
-      .hero-logo-box { 
-        width: 100%; 
-        max-width: 340px; 
-        padding: 25px 20px; 
-        border-radius: 24px;
-      }
-      .hero-logo-box::before {
-        border-radius: 24px;
-      }
-      .hero-visual { order: -1; width: 100%; padding: 0 10px; }
-    }
     .hero h1 .text-gold {
       background: linear-gradient(to right, var(--accent-light), var(--accent-dark));
       -webkit-background-clip: text;
@@ -375,7 +345,7 @@
       font-weight: 500;
     }
 
-    /* Gallery Section */
+    /* Gallery Section (Immersive Text-Free Gallery) */
     .gallery-section {
       padding: 60px 6% 120px;
       max-width: 1400px;
@@ -413,12 +383,13 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
       cursor: pointer;
       transition: all 0.5s ease;
+      background: #000;
     }
 
     .gallery-item:hover {
       transform: translateY(-8px);
-      border-color: rgba(0, 140, 255, 0.4);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(0, 140, 255, 0.2);
+      border-color: rgba(0, 140, 255, 0.5);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 140, 255, 0.35);
       z-index: 2;
     }
 
@@ -426,12 +397,33 @@
       width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
-      filter: brightness(0.6) grayscale(0.2);
+      filter: brightness(0.85) contrast(1.05);
     }
 
     .gallery-item:hover img {
       transform: scale(1.08);
-      filter: brightness(1) grayscale(0);
+      filter: brightness(1.08) contrast(1.15);
+    }
+
+    .gallery-zoom-badge {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.6);
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: rgba(0, 140, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 25px rgba(0, 140, 255, 0.8);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      color: #FFF;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      pointer-events: none;
+    }
+    .gallery-item:hover .gallery-zoom-badge {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
 
     /* Dynamic Grid Placements */
@@ -441,41 +433,354 @@
     .g-4 { grid-column: span 4; grid-row: span 1; }
     .g-5 { grid-column: span 4; grid-row: span 1; }
     .g-6 { grid-column: span 4; grid-row: span 1; }
+    .g-7 { grid-column: span 6; grid-row: span 1; }
+    .g-8 { grid-column: span 6; grid-row: span 1; }
 
-    @media (max-width: 1024px) {
-      .hero h1 { font-size: 4rem; }
-      .g-1 { grid-column: span 12; }
-      .g-2, .g-3 { grid-column: span 6; }
-      .g-4, .g-5, .g-6 { grid-column: span 4; }
+    /* Lightbox Modal (Immersive Fullscreen Viewer) */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
     }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 3.2rem; }
-      .navbar { padding: 20px 5%; }
-      .g-1, .g-2, .g-3, .g-4, .g-5, .g-6 { grid-column: span 12; grid-row: span 1; }
-      .gallery-grid { grid-auto-rows: 250px; }
-      .btn-contact span { display: none; }
-      .btn-contact { padding: 12px; border-radius: 50%; }
+    .lightbox-modal.open {
+      opacity: 1;
+      pointer-events: auto;
     }
+    .lightbox-content {
+      position: relative;
+      max-width: 1150px;
+      max-height: 90vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .lightbox-img-wrapper {
+      position: relative;
+      width: 100%;
+      max-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox-img-wrapper img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 35px rgba(0, 140, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -50px; right: 0;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFF;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+    }
+    .lightbox-close:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFF;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+      z-index: 10;
+    }
+    .lightbox-nav:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .lightbox-prev { left: -70px; }
+    .lightbox-next { right: -70px; }
 
-    /* Floating WhatsApp */
-    .wa-float {
+    /* Floating AI Chatbot Widget (Replaces WhatsApp Bubble) */
+    .ai-bot-float {
       position: fixed;
       bottom: 30px; right: 30px;
-      width: 70px; height: 70px;
-      background: #25d366;
-      color: white;
+      width: 66px; height: 66px;
       border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      color: #FFF;
       display: flex; align-items: center; justify-content: center;
-      font-size: 35px;
-      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
-      z-index: 1000;
+      box-shadow: 0 12px 35px rgba(0, 140, 255, 0.55), 0 0 25px rgba(0, 140, 255, 0.35);
+      z-index: 10000;
+      cursor: pointer;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .wa-float:hover {
-      transform: scale(1.1) translateY(-5px);
-      box-shadow: 0 20px 40px rgba(37, 211, 102, 0.6);
+    .ai-bot-float:hover {
+      transform: scale(1.1) translateY(-4px);
+      box-shadow: 0 18px 45px rgba(0, 140, 255, 0.75), 0 0 40px rgba(0, 140, 255, 0.6);
     }
-    .wa-float svg { width: 36px; height: 36px; }
+    .ai-bot-pulse {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid rgba(0, 140, 255, 0.6);
+      animation: botPulse 2s infinite ease-out;
+      pointer-events: none;
+    }
+    @keyframes botPulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.45); opacity: 0; }
+    }
+    .ai-bot-badge {
+      position: absolute;
+      top: -2px; right: -2px;
+      width: 16px; height: 16px;
+      background: #10B981;
+      border: 3px solid #050505;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #10B981;
+    }
+
+    .ai-chat-drawer {
+      position: fixed;
+      bottom: 108px; right: 30px;
+      width: 390px;
+      max-width: calc(100vw - 36px);
+      height: 550px;
+      max-height: calc(100vh - 140px);
+      background: linear-gradient(145deg, rgba(12, 16, 26, 0.98), rgba(20, 25, 40, 0.96));
+      border: 1px solid rgba(0, 140, 255, 0.4);
+      border-radius: 28px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 140, 255, 0.3);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      opacity: 0;
+      transform: translateY(25px) scale(0.92);
+      pointer-events: none;
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .ai-chat-drawer.open {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .drawer-header {
+      padding: 16px 20px;
+      background: linear-gradient(135deg, rgba(20, 25, 40, 0.95), rgba(10, 12, 20, 0.95));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .drawer-header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .drawer-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      padding: 2px;
+    }
+    .drawer-avatar img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #000;
+    }
+    .drawer-title-box h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFF;
+      line-height: 1.2;
+    }
+    .drawer-title-box p {
+      font-size: 0.78rem;
+      color: #10B981;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .drawer-close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFF;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+    .drawer-close-btn:hover {
+      background: rgba(239, 68, 68, 0.3);
+      border-color: #F87171;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .message-row {
+      display: flex;
+      gap: 10px;
+      max-width: 90%;
+      animation: messageFade 0.35s ease;
+    }
+    @keyframes messageFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-row.bot { align-self: flex-start; }
+    .message-row.user { align-self: flex-end; flex-direction: row-reverse; }
+
+    .message-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .message-row.bot .message-avatar { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #FFF; }
+    .message-row.user .message-avatar { background: #334155; color: #FFF; }
+
+    .message-bubble {
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .message-row.bot .message-bubble {
+      background: rgba(25, 33, 50, 0.9);
+      border: 1px solid rgba(0, 140, 255, 0.25);
+      color: #F1F5F9;
+      border-top-left-radius: 4px;
+    }
+    .message-row.user .message-bubble {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #FFFFFF;
+      border-top-right-radius: 4px;
+    }
+
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 12px 16px;
+      background: rgba(25, 33, 50, 0.9);
+      border: 1px solid rgba(0, 140, 255, 0.25);
+      border-radius: 18px;
+      border-top-left-radius: 4px;
+      width: fit-content;
+    }
+    .typing-dot {
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: typingPulse 1.4s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingPulse {
+      0%, 100% { transform: scale(0.6); opacity: 0.4; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .chat-suggestions {
+      padding: 10px 16px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      background: rgba(8, 10, 18, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .chat-suggestions::-webkit-scrollbar { display: none; }
+    .chip-btn {
+      white-space: nowrap;
+      background: rgba(0, 140, 255, 0.12);
+      border: 1px solid rgba(0, 140, 255, 0.3);
+      color: #93C5FD;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .chip-btn:hover {
+      background: var(--accent);
+      color: #FFF;
+      border-color: var(--accent-light);
+    }
+
+    .chat-input-area {
+      padding: 14px 18px;
+      display: flex;
+      gap: 10px;
+      background: rgba(5, 7, 12, 0.95);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .chat-input {
+      flex: 1;
+      background: rgba(20, 28, 44, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 10px 18px;
+      color: #FFF;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .chat-input:focus { border-color: var(--accent); }
+    .chat-send-btn {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border: none;
+      color: #FFF;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+    .chat-send-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 140, 255, 0.5);
+    }
 
     /* Footer */
     footer {
@@ -510,6 +815,184 @@
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* Location Section */
+    .location-section {
+      padding: 60px 6% 120px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .location-container {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: stretch;
+    }
+
+    .map-box {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 140, 255, 0.3);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 140, 255, 0.15);
+      min-height: 440px;
+      background: #111;
+    }
+    .map-box iframe {
+      width: 100%; height: 100%;
+      min-height: 440px;
+      border: 0;
+      filter: invert(90%) hue-rotate(190deg) contrast(1.2) saturate(0.8);
+    }
+    .map-tag {
+      position: absolute;
+      top: 20px; left: 20px;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(0, 140, 255, 0.4);
+      padding: 12px 18px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+      color: var(--accent);
+    }
+    .map-tag strong { display: block; color: #FFF; font-size: 0.9rem; }
+    .map-tag span { font-size: 0.78rem; color: var(--text-muted); }
+
+    .location-card {
+      background: rgba(17, 17, 17, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 28px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .location-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 20px;
+    }
+    .status-pill {
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-pill.open {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34D399;
+    }
+    .status-pill.closed {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #F87171;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .location-detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .loc-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 140, 255, 0.1);
+      border: 1px solid rgba(0, 140, 255, 0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .location-detail-item h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 3px;
+    }
+    .location-detail-item p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .gps-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .btn-gps {
+      padding: 12px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+    .btn-waze {
+      background: rgba(51, 204, 255, 0.12);
+      border: 1px solid rgba(51, 204, 255, 0.4);
+      color: #38BDF8;
+    }
+    .btn-waze:hover {
+      background: #00D2FF;
+      color: #000;
+      box-shadow: 0 8px 20px rgba(0, 210, 255, 0.4);
+    }
+    .btn-gmaps {
+      background: rgba(234, 67, 53, 0.12);
+      border: 1px solid rgba(234, 67, 53, 0.4);
+      color: #F87171;
+    }
+    .btn-gmaps:hover {
+      background: #EA4335;
+      color: #FFF;
+      box-shadow: 0 8px 20px rgba(234, 67, 53, 0.4);
+    }
+
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 4rem; }
+      .g-1 { grid-column: span 12; }
+      .g-2, .g-3 { grid-column: span 6; }
+      .g-4, .g-5, .g-6 { grid-column: span 4; }
+      .location-container { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3.2rem; }
+      .navbar { padding: 20px 5%; }
+      .g-1, .g-2, .g-3, .g-4, .g-5, .g-6, .g-7, .g-8 { grid-column: span 12; grid-row: span 1; }
+      .gallery-grid { grid-auto-rows: 250px; }
+      .btn-contact span { display: none; }
+      .btn-contact { padding: 12px; border-radius: 50%; }
+      .lightbox-prev { left: 10px; }
+      .lightbox-next { right: 10px; }
     }
   </style>
 </head>
@@ -587,39 +1070,203 @@
     </div>
   </section>
 
-  <!-- Gallery Section -->
+  <!-- Gallery Section (Immersive Text-Free Gallery) -->
   <section class="gallery-section">
     <div class="section-title reveal">
       <h2>Nuestra <span>Firma</span></h2>
       <p>Un vistazo a la perfección. Cada vehículo es una obra maestra de cuidado, dedicación y productos de calidad insuperable.</p>
     </div>
     
-    <div class="gallery-grid">
+    <div class="gallery-grid" id="gallery-grid">
       <div class="gallery-item g-1 reveal">
-        <img src="546624910_122152806806759144_7452567593931737980_n.jpg" alt="Sura Detaling Project 1">
+        <img src="Captura de pantalla de 2026-08-17 08-37-41.png" alt="Sura Detaling Project 1">
+        <div class="gallery-zoom-badge">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        </div>
       </div>
       <div class="gallery-item g-2 reveal" style="transition-delay: 0.1s;">
-        <img src="722560390_17911614156421408_120211765815876530_n.jpg" alt="Sura Detaling Project 2">
+        <img src="Captura de pantalla de 2026-08-17 08-38-21.png" alt="Sura Detaling Project 2">
+        <div class="gallery-zoom-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
       </div>
       <div class="gallery-item g-3 reveal" style="transition-delay: 0.2s;">
-        <img src="723238671_17911614153421408_8553999593333304628_n.jpg" alt="Sura Detaling Project 3">
+        <img src="Captura de pantalla de 2026-08-17 08-41-09.png" alt="Sura Detaling Project 3">
+        <div class="gallery-zoom-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
       </div>
       <div class="gallery-item g-4 reveal">
         <img src="Captura de pantalla de 2026-08-16 22-20-36.png" alt="Sura Detaling Project 4">
+        <div class="gallery-zoom-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
       </div>
       <div class="gallery-item g-5 reveal" style="transition-delay: 0.1s;">
         <img src="Captura de pantalla de 2026-08-16 22-21-59.png" alt="Sura Detaling Project 5">
+        <div class="gallery-zoom-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
       </div>
       <div class="gallery-item g-6 reveal" style="transition-delay: 0.2s;">
         <img src="Captura de pantalla de 2026-08-16 22-22-21.png" alt="Sura Detaling Project 6">
+        <div class="gallery-zoom-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
+      </div>
+      <div class="gallery-item g-7 reveal">
+        <img src="Captura de pantalla de 2026-08-17 08-46-20.png" alt="Sura Detaling Project 7">
+        <div class="gallery-zoom-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
+      </div>
+      <div class="gallery-item g-8 reveal" style="transition-delay: 0.1s;">
+        <img src="Captura de pantalla de 2026-08-17 08-46-59.png" alt="Sura Detaling Project 8">
+        <div class="gallery-zoom-badge"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg></div>
       </div>
     </div>
   </section>
 
-  <!-- Floating WA Button -->
-  <a href="https://wa.me/50686251711" target="_blank" class="wa-float" title="Contactar por WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0012.04 2m0 1.67c2.24 0 4.35.87 5.94 2.46a8.3 8.3 0 012.44 5.88c0 4.59-3.75 8.33-8.35 8.33a8.3 8.3 0 01-4.24-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.27 8.27 0 01-1.27-4.4c0-4.59 3.75-8.4 8.27-8.4m-4.6 4.8c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.03 0 1.2.87 2.35.99 2.52.12.16 1.7 2.72 4.2 3.72 2.08.83 2.5.67 2.95.62.45-.04 1.45-.59 1.66-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.68-.8-.22-.08-.4-.12-.56.12-.16.24-.64.8-.79.97-.14.16-.29.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.5.11-.1.24-.27.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.56-1.36-.77-1.86-.2-.48-.4-.42-.56-.42h-.47z"/></svg>
-  </a>
+  <!-- Location Section -->
+  <section class="location-section" id="ubicacion">
+    <div class="section-title reveal">
+      <h2>Nuestra <span>Ubicación</span></h2>
+      <p>Te esperamos en nuestro estudio en Heredia Centro. Instalaciones diseñadas exclusivamente para el cuidado de tu vehículo.</p>
+    </div>
+
+    <div class="location-container reveal">
+      
+      <!-- Interactive Dark Map -->
+      <div class="map-box">
+        <div class="map-tag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <div>
+            <strong>Sura Detaling Studio</strong>
+            <span>Heredia Centro, Costa Rica</span>
+          </div>
+        </div>
+        <iframe 
+          src="https://maps.google.com/maps?q=9.997433925265067,-84.11900004902625&hl=es&z=17&output=embed" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación Sura Detaling">
+        </iframe>
+      </div>
+
+      <!-- Location Info Box -->
+      <div class="location-card">
+        <div>
+          <div class="location-status">
+            <span style="font-size:0.85rem; color:var(--text-muted);">Estado del Estudio:</span>
+            <span id="live-status-pill" class="status-pill open">
+              <span class="status-dot"></span>
+              <span id="status-text">Abierto Ahora</span>
+            </span>
+          </div>
+
+          <div class="location-detail-item">
+            <div class="loc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div>
+              <h4>Dirección Exacta</h4>
+              <p>📍 Frente a <strong>Grupo Mutual</strong>, Heredia Centro, Costa Rica.</p>
+              <p style="font-size:0.82rem; color:var(--accent-light); margin-top:2px;">Coordenadas: 9.99743, -84.11900</p>
+            </div>
+          </div>
+
+          <div class="location-detail-item">
+            <div class="loc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div>
+              <h4>Horarios de Atención</h4>
+              <p>⌚️ <strong>Lunes a Sábado:</strong> 8:00 AM – 6:00 PM</p>
+              <p>⌚️ <strong>Domingo:</strong> 8:00 AM – 6:00 PM</p>
+              <p style="color:var(--text-muted); font-size:0.85rem; margin-top:2px;">🔐 <strong>Jueves:</strong> Cerrado (Día de mantenimiento)</p>
+            </div>
+          </div>
+
+          <div class="location-detail-item">
+            <div class="loc-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
+            <div>
+              <h4>Contacto Directo</h4>
+              <p>📞 WhatsApp: <strong>+506 8625 1711</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- GPS Action Buttons -->
+        <div class="gps-actions">
+          <a href="https://waze.com/ul?ll=9.997433925265067,-84.11900004902625&navigate=yes" target="_blank" class="btn-gps btn-waze">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l4.5 2.5-4.5 2.5z"/></svg>
+            <span>Navegar en Waze</span>
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=9.997433925265067,-84.11900004902625" target="_blank" class="btn-gps btn-gmaps">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Google Maps</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Fullscreen Immersive Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#10094;</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</button>
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="Sura Detaling Project Preview" id="lightbox-img">
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating AI Chatbot Widget (Replaces WhatsApp Bubble) -->
+  <button class="ai-bot-float" id="ai-bot-float-btn" title="Asesor Virtual IA 24/7">
+    <div class="ai-bot-pulse"></div>
+    <div class="ai-bot-badge"></div>
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"></path>
+      <path d="M8 12h8"></path>
+      <path d="M12 8v8"></path>
+      <circle cx="9" cy="9" r="1.2" fill="currentColor"></circle>
+      <circle cx="15" cy="9" r="1.2" fill="currentColor"></circle>
+    </svg>
+  </button>
+
+  <div class="ai-chat-drawer" id="ai-chat-drawer">
+    <div class="drawer-header">
+      <div class="drawer-header-info">
+        <div class="drawer-avatar">
+          <img src="logo_sura.png" alt="Sura Bot">
+        </div>
+        <div class="drawer-title-box">
+          <h4>Asistente Sura IA</h4>
+          <p><span style="width:6px;height:6px;background:#10B981;border-radius:50%;display:inline-block;"></span> En Línea 24/7</p>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="drawer-close-btn" title="Cerrar Chat">&times;</button>
+    </div>
+
+    <div class="chat-messages" id="drawer-chat-messages">
+      <div class="message-row bot">
+        <div class="message-avatar">SD</div>
+        <div class="message-bubble">
+          👋 ¡Hola! Soy el Asistente Virtual de <strong>Sura Detaling</strong>.<br>
+          ¿En qué puedo ayudarte a cuidar tu vehículo hoy?
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-suggestions">
+      <button class="chip-btn drawer-chip" data-msg="📦 Ver Servicios">📦 Servicios</button>
+      <button class="chip-btn drawer-chip" data-msg="💎 Cerámico 9H">💎 Cerámico 9H</button>
+      <button class="chip-btn drawer-chip" data-msg="📅 Agendar Cita">📅 Agendar Cita</button>
+      <button class="chip-btn drawer-chip" data-msg="📍 Ubicación">📍 Ubicación</button>
+    </div>
+
+    <form class="chat-input-area" id="drawer-chat-form">
+      <input type="text" class="chat-input" id="drawer-chat-input" placeholder="Pregunta a la IA..." autocomplete="off">
+      <button type="submit" class="chat-send-btn" title="Enviar Mensaje">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
+    </form>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -657,6 +1304,172 @@
     reveals.forEach(reveal => {
       revealOnScroll.observe(reveal);
     });
+
+    // Immersive Lightbox Modal for Gallery
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    let currentImgIndex = 0;
+
+    function openLightbox(index) {
+      if (galleryItems.length === 0) return;
+      currentImgIndex = index;
+      const img = galleryItems[currentImgIndex].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxModal.classList.add('open');
+    }
+
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    lightboxClose.addEventListener('click', () => lightboxModal.classList.remove('open'));
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) lightboxModal.classList.remove('open');
+    });
+
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImgIndex = (currentImgIndex - 1 + galleryItems.length) % galleryItems.length;
+      openLightbox(currentImgIndex);
+    });
+
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImgIndex = (currentImgIndex + 1) % galleryItems.length;
+      openLightbox(currentImgIndex);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightboxModal.classList.contains('open')) return;
+      if (e.key === 'Escape') lightboxModal.classList.remove('open');
+      if (e.key === 'ArrowLeft') lightboxPrev.click();
+      if (e.key === 'ArrowRight') lightboxNext.click();
+    });
+
+    // Floating AI Chatbot Widget Engine
+    const aiBotFloatBtn = document.getElementById('ai-bot-float-btn');
+    const aiChatDrawer = document.getElementById('ai-chat-drawer');
+    const drawerCloseBtn = document.getElementById('drawer-close-btn');
+    const drawerChatMessages = document.getElementById('drawer-chat-messages');
+    const drawerChatForm = document.getElementById('drawer-chat-form');
+    const drawerChatInput = document.getElementById('drawer-chat-input');
+    const drawerChips = document.querySelectorAll('.drawer-chip');
+
+    const botKnowledge = [
+      {
+        keywords: ['servicio', 'servicios', 'paquete', 'paquetes', 'precio', 'precios', 'costo'],
+        response: '💎 <strong>Servicios Exclusivos Sura Detaling:</strong><br><br>1️⃣ <strong>Tratamiento Cerámico 9H:</strong> Brillo espejo y protección nanotecnológica de 1 a 5 años.<br>2️⃣ <strong>Corrección de Pintura:</strong> Pulido óptico para eliminar micro-rayones.<br>3️⃣ <strong>Detallado de Interiores VIP:</strong> Desinfección a vapor y nutrición de cuero.'
+      },
+      {
+        keywords: ['ceramico', 'cerámico', '9h', 'proteccion', 'protección', 'capa'],
+        response: '🛡️ <strong>Tratamiento Cerámico Nanotecnológico 9H:</strong><br><br>Crea una barrera permanente con alta repelencia hidrofóbica contra lluvia ácida, rayos UV y heces de aves.'
+      },
+      {
+        keywords: ['cita', 'agendar', 'reserva', 'reservar', 'turno'],
+        response: '📅 <strong>Agendamiento de Citas VIP:</strong><br><br>Atendemos bajo cita previa de Lunes a Domingo (8am - 6pm, Jueves cerrado).<br><br>👉 <a href="https://wa.me/50686251711?text=Hola,%20deseo%20agendar%20una%20cita" target="_blank" style="color:var(--accent-light); font-weight:700;">Toca aquí para agendar por WhatsApp</a>'
+      },
+      {
+        keywords: ['ubicacion', 'ubicación', 'donde', 'dónde', 'direccion', 'dirección', 'llegar', 'heredia'],
+        response: '📍 <strong>Ubicación:</strong><br><br>Estamos en <strong>Heredia Centro, Frente a Grupo Mutual</strong>.'
+      }
+    ];
+
+    if (aiBotFloatBtn && aiChatDrawer) {
+      aiBotFloatBtn.addEventListener('click', () => aiChatDrawer.classList.toggle('open'));
+      if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', () => aiChatDrawer.classList.remove('open'));
+    }
+
+    function appendDrawerMessage(text, sender = 'bot') {
+      const row = document.createElement('div');
+      row.className = `message-row ${sender}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = sender === 'bot' ? 'SD' : 'TÚ';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.innerHTML = text;
+
+      row.appendChild(avatar);
+      row.appendChild(bubble);
+      drawerChatMessages.appendChild(row);
+      drawerChatMessages.scrollTop = drawerChatMessages.scrollHeight;
+    }
+
+    function handleDrawerUserInput(userText) {
+      if (!userText.trim()) return;
+      appendDrawerMessage(userText, 'user');
+      if (drawerChatInput) drawerChatInput.value = '';
+
+      const indicator = document.createElement('div');
+      indicator.className = 'typing-indicator';
+      indicator.id = 'drawer-typing-indicator';
+      indicator.innerHTML = `<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>`;
+      drawerChatMessages.appendChild(indicator);
+      drawerChatMessages.scrollTop = drawerChatMessages.scrollHeight;
+
+      setTimeout(() => {
+        const ind = document.getElementById('drawer-typing-indicator');
+        if (ind) ind.remove();
+
+        const cleanText = userText.toLowerCase();
+        let matched = false;
+
+        for (const item of botKnowledge) {
+          if (item.keywords.some(kw => cleanText.includes(kw))) {
+            appendDrawerMessage(item.response, 'bot');
+            matched = true;
+            break;
+          }
+        }
+
+        if (!matched) {
+          appendDrawerMessage(
+            'Comprendo tu consulta. Para atenderte de forma personalizada, nuestro especialista te responderá de inmediato por WhatsApp.<br><br>👉 <a href="https://wa.me/50686251711?text=Hola,%20quisiera%20consultar:%20' + encodeURIComponent(userText) + '" target="_blank" style="color:var(--accent-light); font-weight:700;">Hablar con un Especialista</a>',
+            'bot'
+          );
+        }
+      }, 700);
+    }
+
+    if (drawerChatForm) {
+      drawerChatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleDrawerUserInput(drawerChatInput.value);
+      });
+    }
+
+    drawerChips.forEach(chip => {
+      chip.addEventListener('click', () => handleDrawerUserInput(chip.dataset.msg));
+    });
+
+    // Live Business Hours Calculation
+    function updateLiveStatus() {
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours();
+      const statusPill = document.getElementById('live-status-pill');
+      const statusText = document.getElementById('status-text');
+
+      if (!statusPill || !statusText) return;
+
+      if (day === 4) { // Jueves cerrado
+        statusPill.className = 'status-pill closed';
+        statusText.textContent = 'Cerrado Hoy (Jueves)';
+      } else if (hour >= 8 && hour < 18) {
+        statusPill.className = 'status-pill open';
+        statusText.textContent = 'Abierto Ahora (8am - 6pm)';
+      } else {
+        statusPill.className = 'status-pill closed';
+        statusText.textContent = 'Cerrado Ahora (Abre 8am)';
+      }
+    }
+    updateLiveStatus();
 
     // Particles Neon Background
     const canvas = document.createElement('canvas');
