@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sura Detaling - Alta Gama</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #050505;
+      --surface: #111111;
+      --surface-glass: rgba(17, 17, 17, 0.6);
+      --text: #F9F9F9;
+      --text-muted: #888888;
+      --accent: #008CFF; /* Neon Blue */
+      --accent-light: #66BEFF;
+      --accent-dark: #0055CC;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, .font-outfit {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      padding: 24px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      background: transparent;
+    }
+    .navbar.scrolled {
+      padding: 16px 6%;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .navbar img {
+      height: 50px;
+      transition: transform 0.3s;
+    }
+    .navbar img:hover { transform: scale(1.05); }
+    
+    .nav-contact {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .btn-contact {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #000;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 140, 255, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 140, 255, 0.4);
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 6% 60px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(0.35);
+      transform: scale(1.1);
+      animation: zoomIn 25s infinite alternate ease-in-out;
+    }
+    @keyframes zoomIn {
+      0% { transform: scale(1.1); }
+      100% { transform: scale(1.25); }
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      /* Gradiente lateral: muy oscuro a la izquierda para el texto, semi-transparente a la derecha para el logo */
+      background: linear-gradient(to right, rgba(5,5,5,0.96) 0%, rgba(5,5,5,0.75) 55%, rgba(5,5,5,0.45) 100%);
+      z-index: -1;
+    }
+
+    /* Layout 2 columnas */
+    .hero-content {
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-logo-box {
+      width: 460px;
+      max-width: 100%;
+      margin-bottom: 0;
+      padding: 40px 50px;
+      border-radius: 32px;
+      position: relative;
+      background-image: url('textura.jpeg');
+      background-size: cover;
+      background-position: center;
+      box-shadow:
+        8px 8px 24px rgba(0, 0, 0, 0.8),
+        -4px -4px 12px rgba(255, 255, 255, 0.04),
+        inset 0 1px 1px rgba(255, 255, 255, 0.06),
+        0 0 18px rgba(0, 140, 255, 0.55),
+        0 0 40px rgba(0, 140, 255, 0.25),
+        0 0 80px rgba(0, 140, 255, 0.12);
+      border: 1px solid rgba(0, 140, 255, 0.45);
+      isolation: isolate;
+    }
+    .hero-logo-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 32px;
+      background: rgba(5, 5, 5, 0.55);
+      z-index: 0;
+    }
+    .hero-logo {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.8));
+    }
+    
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border-radius: 30px;
+      background: rgba(0, 140, 255, 0.1);
+      border: 1px solid rgba(0, 140, 255, 0.3);
+      color: var(--accent);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      backdrop-filter: blur(10px);
+    }
+    .badge .dot {
+      width: 6px; height: 6px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 140, 255, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 140, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 140, 255, 0); }
+    }
+
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 0;
+      font-weight: 300;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-text { align-items: center; }
+      .hero h1 { font-size: 2.8rem; }
+      .hero-logo-box { width: 340px; }
+      .hero-visual { order: -1; }
+    }
+    .hero h1 .text-gold {
+      background: linear-gradient(to right, var(--accent-light), var(--accent-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+    }
+    .hero h1 .text-gold::after {
+      content: '';
+      position: absolute;
+      bottom: 5px; left: 0; width: 100%; height: 20px;
+      background: rgba(0, 140, 255, 0.25);
+      filter: blur(15px);
+      z-index: -1;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    /* Info Cards (Glassmorphism) */
+    .info-section {
+      padding: 100px 6%;
+      position: relative;
+      margin-top: -80px;
+      z-index: 20;
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(17, 17, 17, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 40px 30px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(0, 140, 255, 0.08) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(0, 140, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(0, 140, 255, 0.15);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, #222, #111);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 25px;
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+      transition: all 0.4s ease;
+    }
+    .card:hover .card-icon {
+      transform: scale(1.1) rotate(5deg);
+      color: var(--accent-light);
+      border-color: rgba(0, 140, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0, 140, 255, 0.3);
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .card p, .card div {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .card strong {
+      color: #FFF;
+      font-weight: 500;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      padding: 60px 6% 120px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-title h2 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .section-title h2 span { color: var(--accent); }
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 280px;
+      gap: 24px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: all 0.5s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px);
+      border-color: rgba(0, 140, 255, 0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 25px rgba(0, 140, 255, 0.2);
+      z-index: 2;
+    }
+
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+      filter: brightness(0.6) grayscale(0.2);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(1) grayscale(0);
+    }
+
+    /* Dynamic Grid Placements */
+    .g-1 { grid-column: span 8; grid-row: span 2; }
+    .g-2 { grid-column: span 4; grid-row: span 1; }
+    .g-3 { grid-column: span 4; grid-row: span 1; }
+    .g-4 { grid-column: span 4; grid-row: span 1; }
+    .g-5 { grid-column: span 4; grid-row: span 1; }
+    .g-6 { grid-column: span 4; grid-row: span 1; }
+
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 4rem; }
+      .g-1 { grid-column: span 12; }
+      .g-2, .g-3 { grid-column: span 6; }
+      .g-4, .g-5, .g-6 { grid-column: span 4; }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3.2rem; }
+      .navbar { padding: 20px 5%; }
+      .g-1, .g-2, .g-3, .g-4, .g-5, .g-6 { grid-column: span 12; grid-row: span 1; }
+      .gallery-grid { grid-auto-rows: 250px; }
+      .btn-contact span { display: none; }
+      .btn-contact { padding: 12px; border-radius: 50%; }
+    }
+
+    /* Floating WhatsApp */
+    .wa-float {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      width: 70px; height: 70px;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 35px;
+      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+      z-index: 1000;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .wa-float:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 20px 40px rgba(37, 211, 102, 0.6);
+    }
+    .wa-float svg { width: 36px; height: 36px; }
+
+    /* Footer */
+    footer {
+      background: #020202;
+      padding: 60px 5% 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    .footer-logo {
+      height: 70px;
+      margin-bottom: 30px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .footer-logo:hover { opacity: 1; }
+    .footer-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    .footer-highlight {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Reveal Animation Utility */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="#"><img src="logo_sura.png" alt="Sura Detaling"></a>
+    <div class="nav-contact">
+      <a href="https://wa.me/50686251711" target="_blank" class="btn-contact">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        <span>Agendar Cita</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <img src="textura.jpeg" alt="Fondo Textura Premium" class="hero-bg">
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+      <!-- Columna izquierda: texto -->
+      <div class="hero-text">
+        <div class="badge">
+          <div class="dot"></div>
+          Exclusividad &amp; Perfección
+        </div>
+        <h1>
+          <span class="text-gradient">Elevamos tu vehículo a</span><br>
+          <span class="text-gold">Nivel Alta Gama.</span>
+        </h1>
+        <p>Sura Detaling transforma y protege tu inversión con los estándares más altos de calidad, precisión y estética en Costa Rica.</p>
+      </div>
+      <!-- Columna derecha: logo -->
+      <div class="hero-visual">
+        <div class="hero-logo-box">
+          <img src="logo_sura.png" alt="Sura Detaling Logo" class="hero-logo">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Information Section -->
+  <section class="info-section">
+    <div class="info-grid">
+      
+      <!-- Location -->
+      <div class="card reveal">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <h3>Ubicación Premium</h3>
+        <p>📍 <strong>Frente a Grupo Mutual</strong><br>Heredia centro.</p>
+      </div>
+
+      <!-- Schedule -->
+      <div class="card reveal" style="transition-delay: 0.1s;">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <h3>Horarios de Atención</h3>
+        <p>⌚️ <strong>Lunes a Sábado:</strong> 8am a 6pm<br>⌚️ <strong>Domingo:</strong> 8am a 6pm</p>
+      </div>
+
+      <!-- Closed -->
+      <div class="card reveal" style="transition-delay: 0.2s;">
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <h3>Día de Descanso</h3>
+        <p>🔐 <strong>Jueves Cerrado</strong><br>Nos preparamos para brindarte lo mejor.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section">
+    <div class="section-title reveal">
+      <h2>Nuestra <span>Firma</span></h2>
+      <p>Un vistazo a la perfección. Cada vehículo es una obra maestra de cuidado, dedicación y productos de calidad insuperable.</p>
+    </div>
+    
+    <div class="gallery-grid">
+      <div class="gallery-item g-1 reveal">
+        <img src="546624910_122152806806759144_7452567593931737980_n.jpg" alt="Sura Detaling Project 1">
+      </div>
+      <div class="gallery-item g-2 reveal" style="transition-delay: 0.1s;">
+        <img src="722560390_17911614156421408_120211765815876530_n.jpg" alt="Sura Detaling Project 2">
+      </div>
+      <div class="gallery-item g-3 reveal" style="transition-delay: 0.2s;">
+        <img src="723238671_17911614153421408_8553999593333304628_n.jpg" alt="Sura Detaling Project 3">
+      </div>
+      <div class="gallery-item g-4 reveal">
+        <img src="Captura de pantalla de 2026-08-16 22-20-36.png" alt="Sura Detaling Project 4">
+      </div>
+      <div class="gallery-item g-5 reveal" style="transition-delay: 0.1s;">
+        <img src="Captura de pantalla de 2026-08-16 22-21-59.png" alt="Sura Detaling Project 5">
+      </div>
+      <div class="gallery-item g-6 reveal" style="transition-delay: 0.2s;">
+        <img src="Captura de pantalla de 2026-08-16 22-22-21.png" alt="Sura Detaling Project 6">
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating WA Button -->
+  <a href="https://wa.me/50686251711" target="_blank" class="wa-float" title="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0012.04 2m0 1.67c2.24 0 4.35.87 5.94 2.46a8.3 8.3 0 012.44 5.88c0 4.59-3.75 8.33-8.35 8.33a8.3 8.3 0 01-4.24-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.27 8.27 0 01-1.27-4.4c0-4.59 3.75-8.4 8.27-8.4m-4.6 4.8c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.03 0 1.2.87 2.35.99 2.52.12.16 1.7 2.72 4.2 3.72 2.08.83 2.5.67 2.95.62.45-.04 1.45-.59 1.66-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28-.24-.12-1.45-.72-1.68-.8-.22-.08-.4-.12-.56.12-.16.24-.64.8-.79.97-.14.16-.29.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.44-1.35-1.68-.14-.24-.02-.37.1-.5.11-.1.24-.27.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.56-1.36-.77-1.86-.2-.48-.4-.42-.56-.42h-.47z"/></svg>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <img src="logo_sura.png" alt="Sura Detaling" class="footer-logo">
+    <p class="footer-text">© 2026 Sura Detaling. Todos los derechos reservados.</p>
+    <p class="footer-text">📍 Frente a Grupo Mutual Heredia centro | 📞 WA <span class="footer-highlight">86251711</span></p>
+  </footer>
+
+  <script>
+    // Navbar Scroll Effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Reveal Animation on Scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      });
+    }, revealOptions);
+
+    reveals.forEach(reveal => {
+      revealOnScroll.observe(reveal);
+    });
+  </script>
+</body>
+</html>
