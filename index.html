@@ -436,7 +436,7 @@
     .g-7 { grid-column: span 6; grid-row: span 1; }
     .g-8 { grid-column: span 6; grid-row: span 1; }
 
-    /* Lightbox Modal (Immersive Fullscreen Viewer) */
+    /* 3D Cube Lightbox Modal & Stage */
     .lightbox-modal {
       position: fixed;
       inset: 0;
@@ -465,25 +465,48 @@
       flex-direction: column;
       align-items: center;
     }
-    .lightbox-img-wrapper {
+
+    .cube-viewport {
+      width: 780px;
+      max-width: 86vw;
+      height: 520px;
+      max-height: 70vh;
+      perspective: 1400px;
       position: relative;
+      margin: 0 auto;
+    }
+
+    .cube-stage {
       width: 100%;
-      max-height: 80vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .lightbox-img-wrapper img {
-      max-width: 100%;
-      max-height: 80vh;
-      object-fit: contain;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 35px rgba(0, 140, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+
+    .cube-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      backface-visibility: hidden;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 140, 255, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 140, 255, 0.35);
+      background: #000;
     }
+
+    .cube-face img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .lightbox-close {
       position: absolute;
-      top: -50px; right: 0;
+      top: -55px; right: 0;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #FFF;
@@ -493,6 +516,7 @@
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.3s;
+      z-index: 100;
     }
     .lightbox-close:hover {
       background: var(--accent);
@@ -503,21 +527,23 @@
       top: 50%;
       transform: translateY(-50%);
       background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: #FFF;
-      width: 50px; height: 50px;
+      width: 52px; height: 52px;
       border-radius: 50%;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: all 0.3s;
-      z-index: 10;
+      z-index: 100;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
     }
     .lightbox-nav:hover {
       background: var(--accent);
       border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(0, 140, 255, 0.6);
     }
-    .lightbox-prev { left: -70px; }
-    .lightbox-next { right: -70px; }
+    .lightbox-prev { left: -75px; }
+    .lightbox-next { right: -75px; }
 
     /* Floating AI Chatbot Widget (Replaces WhatsApp Bubble) */
     .ai-bot-float {
@@ -977,22 +1003,309 @@
       box-shadow: 0 8px 20px rgba(234, 67, 53, 0.4);
     }
 
+    /* ==========================================================================
+       Comprehensive Responsive Breakpoints (Mobile, Tablet, Desktop)
+       ========================================================================== */
+
+    /* Laptops & Tablets (Max-width: 1024px) */
     @media (max-width: 1024px) {
-      .hero h1 { font-size: 4rem; }
-      .g-1 { grid-column: span 12; }
-      .g-2, .g-3 { grid-column: span 6; }
-      .g-4, .g-5, .g-6 { grid-column: span 4; }
-      .location-container { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 3.4rem; }
+      .hero-logo-box { width: 100%; max-width: 380px; padding: 30px; }
+      .location-container { grid-template-columns: 1fr; gap: 30px; }
+      .cube-viewport { width: 88vw; height: 55vh; max-height: 460px; }
+      .lightbox-prev { left: -30px; }
+      .lightbox-next { right: -30px; }
     }
+
+    /* Tablets & Large Phones (Max-width: 768px) */
     @media (max-width: 768px) {
-      .hero h1 { font-size: 3.2rem; }
-      .navbar { padding: 20px 5%; }
-      .g-1, .g-2, .g-3, .g-4, .g-5, .g-6, .g-7, .g-8 { grid-column: span 12; grid-row: span 1; }
-      .gallery-grid { grid-auto-rows: 250px; }
-      .btn-contact span { display: none; }
-      .btn-contact { padding: 12px; border-radius: 50%; }
-      .lightbox-prev { left: 10px; }
-      .lightbox-next { right: 10px; }
+      .navbar { padding: 16px 5%; }
+      .navbar img { height: 44px; }
+      .btn-contact { padding: 10px 18px; font-size: 0.88rem; }
+      
+      .hero {
+        min-height: auto;
+        padding: 110px 5% 50px;
+      }
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        text-align: center;
+      }
+      .hero-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: 2.6rem;
+        line-height: 1.18;
+      }
+      .hero p {
+        font-size: 1.02rem;
+      }
+      .hero-logo-box {
+        width: 100%;
+        max-width: 340px;
+        padding: 28px 24px;
+        margin: 0 auto;
+      }
+      .hero-logo {
+        max-width: 260px;
+      }
+
+      .info-section {
+        margin-top: 0;
+        padding: 50px 5%;
+      }
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .card {
+        padding: 28px 22px;
+      }
+
+      .section-title {
+        margin-bottom: 40px;
+      }
+      .section-title h2 {
+        font-size: 2.4rem;
+      }
+
+      .gallery-section {
+        padding: 50px 5% 90px;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 230px;
+        gap: 16px;
+      }
+      .g-1, .g-2, .g-3, .g-4, .g-5, .g-6, .g-7, .g-8 {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+
+      .location-section {
+        padding: 50px 5% 90px;
+      }
+      .location-card {
+        padding: 26px 20px;
+      }
+      .map-box, .map-box iframe {
+        min-height: 320px;
+        height: 320px;
+      }
+
+      .cube-viewport {
+        width: 92vw;
+        height: 52vh;
+        max-height: 420px;
+      }
+      .lightbox-prev { left: 5px; width: 46px; height: 46px; }
+      .lightbox-next { right: 5px; width: 46px; height: 46px; }
+
+      .ai-bot-float {
+        bottom: 24px;
+        right: 24px;
+        width: 60px;
+        height: 60px;
+      }
+      .ai-chat-drawer {
+        bottom: 95px;
+        right: 15px;
+        left: 15px;
+        width: auto;
+        max-width: none;
+        height: 75vh;
+        max-height: 520px;
+      }
+    }
+
+    /* Small Mobile Devices (Max-width: 480px) */
+    @media (max-width: 480px) {
+      html, body {
+        overflow-x: hidden;
+        width: 100%;
+      }
+      .navbar {
+        padding: 12px 4%;
+      }
+      .navbar img {
+        height: 36px;
+      }
+      .btn-contact {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+      .btn-contact span {
+        display: inline;
+      }
+      .hero {
+        padding: 95px 4% 36px;
+      }
+      .badge {
+        font-size: 0.72rem;
+        padding: 6px 12px;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+      }
+      .hero h1 {
+        font-size: 1.95rem;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+      }
+      .hero p {
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+      .hero-logo-box {
+        width: 100%;
+        max-width: 280px;
+        padding: 20px 16px;
+        border-radius: 20px;
+      }
+      .hero-logo {
+        max-width: 210px;
+      }
+
+      .info-section {
+        padding: 36px 4%;
+      }
+      .card {
+        padding: 22px 18px;
+        border-radius: 20px;
+      }
+      .card-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+      }
+      .card h3 {
+        font-size: 1.15rem;
+      }
+      .card p {
+        font-size: 0.9rem;
+      }
+
+      .section-title {
+        margin-bottom: 30px;
+      }
+      .section-title h2 {
+        font-size: 1.95rem;
+      }
+      .section-title p {
+        font-size: 0.88rem;
+      }
+
+      .gallery-section {
+        padding: 36px 4% 70px;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 210px;
+        gap: 14px;
+      }
+      .g-1, .g-2, .g-3, .g-4, .g-5, .g-6, .g-7, .g-8 {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .location-section {
+        padding: 36px 4% 70px;
+      }
+      .location-card {
+        padding: 20px 16px;
+        border-radius: 20px;
+      }
+      .location-status {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .gps-actions {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .map-box, .map-box iframe {
+        min-height: 260px;
+        height: 260px;
+        border-radius: 20px;
+      }
+      .map-tag {
+        top: 12px;
+        left: 12px;
+        padding: 8px 12px;
+      }
+      .map-tag strong {
+        font-size: 0.82rem;
+      }
+      .map-tag span {
+        font-size: 0.72rem;
+      }
+
+      .lightbox-modal {
+        padding: 10px;
+      }
+      .cube-viewport {
+        width: 95vw;
+        height: 48vh;
+        max-height: 360px;
+      }
+      .lightbox-prev {
+        left: -8px;
+        top: auto;
+        bottom: -58px;
+        transform: none;
+        width: 44px;
+        height: 44px;
+      }
+      .lightbox-next {
+        right: -8px;
+        top: auto;
+        bottom: -58px;
+        transform: none;
+        width: 44px;
+        height: 44px;
+      }
+      .lightbox-close {
+        top: -45px;
+        right: 0;
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
+      }
+
+      .ai-bot-float {
+        bottom: 18px;
+        right: 18px;
+        width: 54px;
+        height: 54px;
+      }
+      .ai-bot-float svg {
+        width: 26px;
+        height: 26px;
+      }
+      .ai-chat-drawer {
+        bottom: 82px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+        max-width: none;
+        height: 78vh;
+        max-height: 480px;
+        border-radius: 22px;
+      }
+      .drawer-header {
+        padding: 14px 16px;
+      }
+      .chat-messages {
+        padding: 14px 12px;
+      }
+      .chat-input-box {
+        padding: 12px 14px;
+      }
     }
   </style>
 </head>
@@ -1204,14 +1517,20 @@
     </div>
   </section>
 
-  <!-- Fullscreen Immersive Lightbox Modal -->
+  <!-- Fullscreen 3D Cube Lightbox Modal -->
   <div class="lightbox-modal" id="lightbox-modal">
     <div class="lightbox-content">
-      <button class="lightbox-close" id="lightbox-close">&times;</button>
-      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#10094;</button>
-      <button class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</button>
-      <div class="lightbox-img-wrapper">
-        <img src="" alt="Sura Detaling Project Preview" id="lightbox-img">
+      <button class="lightbox-close" id="lightbox-close" title="Cerrar (Esc)">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" title="Anterior (←)">&#10094;</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next" title="Siguiente (→)">&#10095;</button>
+
+      <div class="cube-viewport" id="cube-viewport">
+        <div class="cube-stage" id="cube-stage">
+          <div class="cube-face face-front"><img id="face-front-img" src="" alt="Sura Project Front"></div>
+          <div class="cube-face face-right"><img id="face-right-img" src="" alt="Sura Project Right"></div>
+          <div class="cube-face face-back"><img id="face-back-img" src="" alt="Sura Project Back"></div>
+          <div class="cube-face face-left"><img id="face-left-img" src="" alt="Sura Project Left"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1305,50 +1624,133 @@
       revealOnScroll.observe(reveal);
     });
 
-    // Immersive Lightbox Modal for Gallery
+    // 3D Cube Lightbox Carousel Engine
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightboxModal = document.getElementById('lightbox-modal');
-    const lightboxImg = document.getElementById('lightbox-img');
     const lightboxClose = document.getElementById('lightbox-close');
     const lightboxPrev = document.getElementById('lightbox-prev');
     const lightboxNext = document.getElementById('lightbox-next');
+    const cubeStage = document.getElementById('cube-stage');
+    const cubeViewport = document.getElementById('cube-viewport');
+    const faceFrontImg = document.getElementById('face-front-img');
+    const faceRightImg = document.getElementById('face-right-img');
+    const faceBackImg = document.getElementById('face-back-img');
+    const faceLeftImg = document.getElementById('face-left-img');
+
     let currentImgIndex = 0;
+    let cubeAngleY = 0;
+    let isAnimating = false;
+
+    function getImgSrc(index) {
+      const idx = (index + galleryItems.length) % galleryItems.length;
+      return galleryItems[idx].querySelector('img').src;
+    }
+
+    function setupCubeFaces(centerIdx) {
+      const total = galleryItems.length;
+      const frontIdx = (centerIdx + total) % total;
+      const rightIdx = (centerIdx + 1) % total;
+      const backIdx = (centerIdx + 2) % total;
+      const leftIdx = (centerIdx - 1 + total) % total;
+
+      if (faceFrontImg) faceFrontImg.src = getImgSrc(frontIdx);
+      if (faceRightImg) faceRightImg.src = getImgSrc(rightIdx);
+      if (faceBackImg) faceBackImg.src = getImgSrc(backIdx);
+      if (faceLeftImg) faceLeftImg.src = getImgSrc(leftIdx);
+    }
+
+    function updateCubeDepth() {
+      if (!cubeViewport || !cubeStage) return;
+      const width = cubeViewport.offsetWidth;
+      const depth = width / 2;
+
+      const fFront = document.querySelector('.face-front');
+      const fRight = document.querySelector('.face-right');
+      const fBack = document.querySelector('.face-back');
+      const fLeft = document.querySelector('.face-left');
+
+      if (fFront) fFront.style.transform = `rotateY(0deg) translateZ(${depth}px)`;
+      if (fRight) fRight.style.transform = `rotateY(90deg) translateZ(${depth}px)`;
+      if (fBack) fBack.style.transform = `rotateY(180deg) translateZ(${depth}px)`;
+      if (fLeft) fLeft.style.transform = `rotateY(-90deg) translateZ(${depth}px)`;
+
+      cubeStage.style.transform = `translateZ(-${depth}px) rotateY(${cubeAngleY}deg)`;
+    }
 
     function openLightbox(index) {
       if (galleryItems.length === 0) return;
       currentImgIndex = index;
-      const img = galleryItems[currentImgIndex].querySelector('img');
-      lightboxImg.src = img.src;
+      cubeAngleY = 0;
+      setupCubeFaces(currentImgIndex);
       lightboxModal.classList.add('open');
+      setTimeout(updateCubeDepth, 40);
+    }
+
+    function rotateCube(direction) {
+      if (isAnimating || !cubeViewport || !cubeStage) return;
+      isAnimating = true;
+
+      const viewportWidth = cubeViewport.offsetWidth;
+      const depth = viewportWidth / 2;
+
+      if (direction === 'next') {
+        currentImgIndex = (currentImgIndex + 1) % galleryItems.length;
+        cubeAngleY -= 90;
+      } else {
+        currentImgIndex = (currentImgIndex - 1 + galleryItems.length) % galleryItems.length;
+        cubeAngleY += 90;
+      }
+
+      cubeStage.style.transition = 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+      cubeStage.style.transform = `translateZ(-${depth}px) rotateY(${cubeAngleY}deg)`;
+
+      setTimeout(() => {
+        setupCubeFaces(currentImgIndex);
+        cubeAngleY = 0;
+        cubeStage.style.transition = 'none';
+        cubeStage.style.transform = `translateZ(-${depth}px) rotateY(0deg)`;
+        setTimeout(() => {
+          cubeStage.style.transition = 'transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          isAnimating = false;
+        }, 50);
+      }, 790);
     }
 
     galleryItems.forEach((item, index) => {
       item.addEventListener('click', () => openLightbox(index));
     });
 
-    lightboxClose.addEventListener('click', () => lightboxModal.classList.remove('open'));
-    lightboxModal.addEventListener('click', (e) => {
-      if (e.target === lightboxModal) lightboxModal.classList.remove('open');
-    });
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', () => lightboxModal.classList.remove('open'));
+    }
+    if (lightboxModal) {
+      lightboxModal.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) lightboxModal.classList.remove('open');
+      });
+    }
 
-    lightboxPrev.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentImgIndex = (currentImgIndex - 1 + galleryItems.length) % galleryItems.length;
-      openLightbox(currentImgIndex);
-    });
+    if (lightboxPrev) {
+      lightboxPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        rotateCube('prev');
+      });
+    }
 
-    lightboxNext.addEventListener('click', (e) => {
-      e.stopPropagation();
-      currentImgIndex = (currentImgIndex + 1) % galleryItems.length;
-      openLightbox(currentImgIndex);
-    });
+    if (lightboxNext) {
+      lightboxNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        rotateCube('next');
+      });
+    }
 
     document.addEventListener('keydown', (e) => {
-      if (!lightboxModal.classList.contains('open')) return;
+      if (!lightboxModal || !lightboxModal.classList.contains('open')) return;
       if (e.key === 'Escape') lightboxModal.classList.remove('open');
-      if (e.key === 'ArrowLeft') lightboxPrev.click();
-      if (e.key === 'ArrowRight') lightboxNext.click();
+      if (e.key === 'ArrowLeft') rotateCube('prev');
+      if (e.key === 'ArrowRight') rotateCube('next');
     });
+
+    window.addEventListener('resize', updateCubeDepth);
 
     // Floating AI Chatbot Widget Engine
     const aiBotFloatBtn = document.getElementById('ai-bot-float-btn');
