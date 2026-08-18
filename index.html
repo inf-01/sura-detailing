@@ -285,7 +285,7 @@
       width: 460px;
       max-width: 100%;
       margin-bottom: 0;
-      padding: 40px 50px;
+      padding: 20px 30px;
       border-radius: 32px;
       position: relative;
       background-image: url('textura.jpeg');
@@ -303,6 +303,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
     .hero-logo-box::before {
       content: '';
@@ -313,13 +314,14 @@
       z-index: 0;
     }
     .hero-logo {
-      width: 85%;
-      max-width: 400px;
+      width: 130%;
+      max-width: none;
       height: auto;
       display: block;
       margin: 0 auto;
       position: relative;
       z-index: 1;
+      transform: scale(1.15);
       filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 12px rgba(0, 140, 255, 0.3));
     }
     
@@ -1225,13 +1227,15 @@
       .hero-logo-box {
         width: 88vw;
         max-width: 360px;
-        padding: 30px 28px;
+        padding: 14px 20px;
         margin: 0 auto;
         border-radius: 28px;
+        overflow: hidden;
       }
       .hero-logo {
-        width: 80%;
-        max-width: 280px;
+        width: 130%;
+        max-width: none;
+        transform: scale(1.1);
       }
 
       .info-section {
@@ -1343,12 +1347,14 @@
       .hero-logo-box {
         width: 82vw;
         max-width: 300px;
-        padding: 22px 20px;
+        padding: 10px 16px;
         border-radius: 22px;
+        overflow: hidden;
       }
       .hero-logo {
-        width: 80%;
-        max-width: 230px;
+        width: 130%;
+        max-width: none;
+        transform: scale(1.1);
       }
 
       .info-section {
